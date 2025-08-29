@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://mt28kkl5f3v6"]
+
+[ext_resource type="Script" uid="uid://drqdtsymlqbtw" path="res://scripts/programming_workstation.gd" id="1_ka16q"]
+[ext_resource type="Texture2D" uid="uid://ion0mns4nh7v" path="res://assets/objects/desktop_screen_blackBG.png" id="2_ubsku"]
+[ext_resource type="Texture2D" uid="uid://d3aom5hjb67de" path="res://assets/objects/back_button.png" id="3_n7g8t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7g8t"]
+size = Vector2(53.3334, 20)
+
+[node name="Prorgamming Tasks" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ka16q")
+
+[node name="DesktopScreenBlackBg" type="Sprite2D" parent="."]
+position = Vector2(575, 327.25)
+scale = Vector2(2.875, 3.2675)
+texture = ExtResource("2_ubsku")
+
+[node name="CodeText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 86.0
+offset_right = 829.0
+offset_bottom = 436.0
+text = "Cover the screen"
+
+[node name="ChoicesContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 331.0
+offset_top = 285.0
+offset_right = 724.0
+offset_bottom = 419.0
+
+[node name="Feedback" type="Label" parent="."]
+layout_mode = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1023, 55)
+scale = Vector2(2.55, 2.79)
+
+[node name="BackButton" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("3_n7g8t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.00012207, 0)
+shape = SubResource("RectangleShape2D_n7g8t")

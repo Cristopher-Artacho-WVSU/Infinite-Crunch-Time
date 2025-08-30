@@ -11,14 +11,20 @@ var index_to_color: Dictionary = {}   # key: int index, value: Color
 var tile_nodes: Dictionary = {}       # key: Vector2i(grid_x,grid_y), value: PanelContainer
 var selected_index: int = -1          # explicitly typed to avoid "null" inference error
 
+
+	
 func _ready() -> void:
 #	FOR THE BACKGROUND
 	animation.play("bg")
-#	
 	image_conversion()
 
 
 
+func _on_back_button_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		print("clicked back button")
+		GameState.go_back()
+	
 func image_conversion():
 	#READ IMAGE AND CONVERT IT TO RGBA8 FORMAT IF IT ISN'T RGBA8
 	var img: Image = source_image_texture.get_image()
@@ -175,5 +181,14 @@ func _flood_fill(start_pos: Vector2i, num: int) -> void:
 		# enqueue 4-neighbors
 		for d in [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]:
 			queue.append(pos + d)
-
+			
+	_check_completion()
 	print("Flood-filled region with number", num)
+	
+func _check_completion() -> void:
+	for tile in tile_nodes.values():
+		if tile.get_meta("filled") == false:
+			return # stop early if we find at least one unfilled tile
+#		TRY TO CHECK IF BOTH TASKS ARE DONE
+		GameState.sample_art_done = true
+		GameState.check_game_end()

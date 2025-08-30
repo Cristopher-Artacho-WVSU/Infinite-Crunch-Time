@@ -1,0 +1,10 @@
+~ start
+Boss: Welcome applicant, here are the tasks you are to do
+Boss: Make the art based on the drawing (magic diamond) and debug the code (programming)
+=>< instructions
+Boss: Click on the art workstation for working art
+=> END
+
+~ instructions
+Boss: By clicking on the Programming Workstation, you are to do the debugging
+=> END

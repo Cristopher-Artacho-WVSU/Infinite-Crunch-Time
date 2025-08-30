@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://ckvxnqi24pluf"]
+[gd_scene load_steps=101 format=3 uid="uid://ckvxnqi24pluf"]
 
 [ext_resource type="Script" uid="uid://cuhij5n8ye22s" path="res://scripts/art_workstation.gd" id="1_qbiyi"]
 [ext_resource type="Texture2D" uid="uid://k8giyckf5esc" path="res://assets/objects/GridLoop/GridLoop_00000.png" id="2_jgrik"]
@@ -97,6 +97,7 @@
 [ext_resource type="Texture2D" uid="uid://g7t8cahqloxq" path="res://assets/objects/GridLoop/GridLoop_00093.png" id="95_6stnj"]
 [ext_resource type="Texture2D" uid="uid://bvv3boyisbdcr" path="res://assets/objects/GridLoop/GridLoop_00094.png" id="96_erojl"]
 [ext_resource type="Texture2D" uid="uid://ca6kyke37511w" path="res://assets/objects/GridLoop/GridLoop_00095.png" id="97_d0agx"]
+[ext_resource type="Texture2D" uid="uid://d3aom5hjb67de" path="res://assets/objects/back_button.png" id="98_rc8k5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ydam7"]
 animations = [{
@@ -394,6 +395,9 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nqgh"]
+size = Vector2(53.3334, 20)
+
 [node name="art_workstation" type="Node2D"]
 script = ExtResource("1_qbiyi")
 
@@ -402,3 +406,16 @@ position = Vector2(577, 330)
 sprite_frames = SubResource("SpriteFrames_ydam7")
 animation = &"bg"
 frame_progress = 0.730454
+
+[node name="back_button" type="Area2D" parent="."]
+position = Vector2(1023, 55)
+scale = Vector2(2.55, 2.79)
+
+[node name="BackButton" type="Sprite2D" parent="back_button"]
+texture = ExtResource("98_rc8k5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="back_button"]
+position = Vector2(-0.00012207, 0)
+shape = SubResource("RectangleShape2D_3nqgh")
+
+[connection signal="input_event" from="back_button" to="." method="_on_back_button_input_event"]

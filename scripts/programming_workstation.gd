@@ -79,6 +79,14 @@ func _on_choice_pressed(choice: String):
 	if choice in answers:
 		$Feedback.text = "✅ Correct!"
 		$Feedback.add_theme_color_override("font_color", Color(0, 1, 0))
+#		TRY TO CHECK IF BOTH TASKS ARE DONE
+		GameState.sample_debug_done = true
+		GameState.check_game_end()
 	else:
 		$Feedback.text = "❌ Try again!"
 		$Feedback.add_theme_color_override("font_color", Color(1, 0, 0))
+
+func _on_back_button_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		print("clicked back button")
+		GameState.go_back()

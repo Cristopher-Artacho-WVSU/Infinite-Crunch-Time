@@ -407,6 +407,13 @@ sprite_frames = SubResource("SpriteFrames_ydam7")
 animation = &"bg"
 frame_progress = 0.730454
 
+[node name="SubmitButton" type="Button" parent="."]
+offset_left = 400.0
+offset_top = 500.0
+offset_right = 600.0
+offset_bottom = 550.0
+text = "Submit Art"
+
 [node name="back_button" type="Area2D" parent="."]
 position = Vector2(1023, 55)
 scale = Vector2(2.55, 2.79)
@@ -418,4 +425,5 @@ texture = ExtResource("98_rc8k5")
 position = Vector2(-0.00012207, 0)
 shape = SubResource("RectangleShape2D_3nqgh")
 
+[connection signal="pressed" from="SubmitButton" to="." method="_on_submit_pressed"]
 [connection signal="input_event" from="back_button" to="." method="_on_back_button_input_event"]

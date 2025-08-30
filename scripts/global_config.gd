@@ -2,8 +2,12 @@ extends Node
 
 var sample_debug_done := false
 var sample_art_done := false
+var sample_music_done := false
 
 var intro_seen := false
+var programming_praise_done := false
+var art_praise_done := false
+var music_praise_done := false
 
 signal tasks_updated
 var previous_scene_path := ""

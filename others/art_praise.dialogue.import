@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cmmc64sy8cwdk"
+path="res://.godot/imported/art_praise.dialogue-19002282a38e7f64098cadb1a796b4c9.tres"
+
+[deps]
+
+source_file="res://others/art_praise.dialogue"
+dest_files=["res://.godot/imported/art_praise.dialogue-19002282a38e7f64098cadb1a796b4c9.tres"]
+
+[params]
+
+defaults=true

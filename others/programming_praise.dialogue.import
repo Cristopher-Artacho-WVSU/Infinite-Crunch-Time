@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ci4hsw3twj1av"
+path="res://.godot/imported/programming_praise.dialogue-5d595f80acd53fcddb8d7577181b4fbc.tres"
+
+[deps]
+
+source_file="res://others/programming_praise.dialogue"
+dest_files=["res://.godot/imported/programming_praise.dialogue-5d595f80acd53fcddb8d7577181b4fbc.tres"]
+
+[params]
+
+defaults=true

@@ -1,8 +1,36 @@
 extends Control
 
-var question_text = "Hello, ___!"
-var answers = ["World"]  
-var choices = ["World", "Godot", "Player", "Game"]
+var levels = [
+	{
+		"question": "print(\"Hello, ___!\")",
+		"answers": ["World"],
+		"choices": ["World", "Godot", "Player", "Game"]
+	},
+	{
+		"question": "Correct syntax for a GDScript function: func ___():",
+		"answers": ["my_function"],
+		"choices": ["my_function", "function my_function", "func my_function", "def my_function()"]
+	},
+	{
+		"question": "Which is a loop in GDScript?",
+		"answers": ["for"],
+		"choices": ["for", "if", "print", "var"]
+	},
+	{
+		"question": "Debug: print(\"Hello \" + name) Error: name not defined. Fix:",
+		"answers": ["var name = \"value\""],
+		"choices": ["define name", "var name", "var name = \"value\"", "print(name)"]
+	},
+	{
+		"question": "What does 'if' do in GDScript?",
+		"answers": ["checks condition"],
+		"choices": ["checks condition", "loops", "prints text", "defines variable"]
+	}
+]
+
+var current_level = 0
+var current_answers = []
+var equilibrio_score = 50.0
 
 
 
@@ -19,48 +47,53 @@ var choices = ["World", "Godot", "Player", "Game"]
 func _ready():
 
 	# Center the container
-	$ChoicesContainer.set_anchors_preset(Control.PRESET_CENTER)
-	$ChoicesContainer.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	$ChoicesContainer.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	$ChoicesCenter.set_anchors_preset(Control.PRESET_CENTER)
+	$ChoicesCenter.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	$ChoicesCenter.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
 	# Add padding: 10px X-axis, 5px Y-axis
-	if $ChoicesContainer is GridContainer or $ChoicesContainer is VBoxContainer or $ChoicesContainer is HBoxContainer:
-		$ChoicesContainer.add_theme_constant_override("h_separation", 10)
-		$ChoicesContainer.add_theme_constant_override("v_separation", 20)
+	if $ChoicesCenter/ChoicesContainer is GridContainer or $ChoicesCenter/ChoicesContainer is VBoxContainer or $ChoicesCenter/ChoicesContainer is HBoxContainer:
+		$ChoicesCenter/ChoicesContainer.add_theme_constant_override("h_separation", 10)
+		$ChoicesCenter/ChoicesContainer.add_theme_constant_override("v_separation", 20)
 	
-	# Set question
-	$CodeText.text = question_text
+	# Load current level
+	var level = levels[current_level]
+	var question_text = level["question"]
+	current_answers = level["answers"]
+	var choices = level["choices"]
+
+	# Set level and question
+	$LevelLabel.text = "Level " + str(current_level + 1)
+	$TextPanel/CodeText.text = question_text
 	$Feedback.text = ""
+	$EquilibrioScale.value = equilibrio_score
 
 	# Clear old choice buttons
-	for child in $ChoicesContainer.get_children():
+	for child in $ChoicesCenter/ChoicesContainer.get_children():
 		child.queue_free()
 
 	# If it's a GridContainer, set 2 columns
-	if $ChoicesContainer is GridContainer:
-		$ChoicesContainer.columns = 2  
+	if $ChoicesCenter/ChoicesContainer is GridContainer:
+		$ChoicesCenter/ChoicesContainer.columns = 2  
 
 	# Generate buttons with custom backgrounds
-	for choice in choices:
+	var textures = [yellow_tex, blue_tex, green_tex, red_tex]
+	for i in range(choices.size()):
+		var choice = choices[i]
 		var btn = Button.new()
 		btn.text = choice
 
-		# Pick texture based on choice
+		# Pick texture based on index
 		var stylebox = StyleBoxTexture.new()
-		match choice:
-			"World":
-				stylebox.texture = yellow_tex
-			"Godot":
-				stylebox.texture = blue_tex
-			"Player":
-				stylebox.texture = green_tex
-			"Game":
-				stylebox.texture = red_tex
+		if i < textures.size():
+			stylebox.texture = textures[i]
 
-		# Scale button size = 3x texture size
+		# Scale button size
 		if stylebox.texture:
 			var tex_size = stylebox.texture.get_size()
-			btn.custom_minimum_size = tex_size * 2  # make it 3x bigger
+			btn.custom_minimum_size = tex_size * 2  # make it smaller
+		else:
+			btn.custom_minimum_size = Vector2(120, 60)
 
 		# Apply stylebox to all button states
 		btn.add_theme_stylebox_override("normal", stylebox)
@@ -73,18 +106,27 @@ func _ready():
 
 		# Connect button signal
 		btn.pressed.connect(_on_choice_pressed.bind(choice))
-		$ChoicesContainer.add_child(btn)
+		$ChoicesCenter/ChoicesContainer.add_child(btn)
 
 func _on_choice_pressed(choice: String):
-	if choice in answers:
+	if choice in current_answers:
 		$Feedback.text = "✅ Correct!"
 		$Feedback.add_theme_color_override("font_color", Color(0, 1, 0))
-#		TRY TO CHECK IF BOTH TASKS ARE DONE
-		GameState.sample_debug_done = true
-		GameState.check_game_end()
+		equilibrio_score = clamp(equilibrio_score + 10, 0, 100)
+		# Progress to next level
+		current_level += 1
+		if current_level < levels.size():
+			_ready()  # Reload next level
+		else:
+			$Feedback.text = "All levels completed!"
+			GameState.sample_debug_done = true
+			GameState.programming_praise_done = true
+			get_tree().change_scene_to_file("res://scenes/cubicleRoom_view.tscn")
 	else:
-		$Feedback.text = "❌ Try again!"
+		$Feedback.text = "Try again!"
 		$Feedback.add_theme_color_override("font_color", Color(1, 0, 0))
+		equilibrio_score = clamp(equilibrio_score - 5, 0, 100)
+	$EquilibrioScale.value = equilibrio_score
 
 func _on_back_button_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:

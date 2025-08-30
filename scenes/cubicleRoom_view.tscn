@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmyq8nkji0yoa"]
+[gd_scene load_steps=6 format=3 uid="uid://cmyq8nkji0yoa"]
 
-[ext_resource type="Script" uid="uid://b8otcmpx4h2fv" path="res://scripts/cubicle_room_view.gd" id="1_uhbhr"]
 [ext_resource type="Texture2D" uid="uid://bsgq4acohffum" path="res://assets/objects/cubicleRoom_view.png" id="2_uhbhr"]
+[ext_resource type="Script" uid="uid://b8otcmpx4h2fv" path="res://scripts/cubicle_room_view.gd" id="3_desktop"]
+[ext_resource type="Texture2D" uid="uid://d3aom5hjb67de" path="res://assets/objects/back_button.png" id="4_carrot"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhbhr"]
 size = Vector2(86, 67)
@@ -10,12 +11,28 @@ size = Vector2(86, 67)
 size = Vector2(82, 56)
 
 [node name="Cubicle Room View" type="Node2D"]
-script = ExtResource("1_uhbhr")
+script = ExtResource("3_desktop")
 
 [node name="CubicleRoomView" type="Sprite2D" parent="."]
 position = Vector2(549, 324)
 scale = Vector2(0.650034, 0.646525)
 texture = ExtResource("2_uhbhr")
+
+[node name="ProgrammingInstrument" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(392, 290)
+scale = Vector2(0.5, 0.5)
+
+[node name="ArtInstrument" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(533, 260)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_carrot")
+
+[node name="MusicInstrument" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(650, 280)
+scale = Vector2(0.5, 0.5)
 
 [node name="Programming Workstation" type="Area2D" parent="."]
 
@@ -31,5 +48,13 @@ z_index = 1
 position = Vector2(533, 260)
 shape = SubResource("RectangleShape2D_mnbld")
 
+[node name="Music Workstation" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Music Workstation"]
+z_index = 1
+position = Vector2(650, 280)
+shape = SubResource("RectangleShape2D_mnbld")
+
 [connection signal="input_event" from="Programming Workstation" to="." method="_on_programming_workstation_input_event"]
 [connection signal="input_event" from="Art Workstation" to="." method="_on_art_workstation_input_event"]
+[connection signal="input_event" from="Music Workstation" to="." method="_on_music_workstation_input_event"]

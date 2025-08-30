@@ -189,6 +189,7 @@ func _check_completion() -> void:
 	for tile in tile_nodes.values():
 		if tile.get_meta("filled") == false:
 			return # stop early if we find at least one unfilled tile
-#		TRY TO CHECK IF BOTH TASKS ARE DONE
+#		Art task completed
 		GameState.sample_art_done = true
-		GameState.check_game_end()
+		GameState.art_praise_done = true
+		get_tree().change_scene_to_file.call_deferred("res://scenes/cubicleRoom_view.tscn")

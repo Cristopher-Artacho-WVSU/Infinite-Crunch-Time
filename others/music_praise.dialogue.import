@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://68jgydjsm2t3"
+path="res://.godot/imported/music_praise.dialogue-5da381cd68cd9fb395f87f77b37ead3e.tres"
+
+[deps]
+
+source_file="res://others/music_praise.dialogue"
+dest_files=["res://.godot/imported/music_praise.dialogue-5da381cd68cd9fb395f87f77b37ead3e.tres"]
+
+[params]
+
+defaults=true

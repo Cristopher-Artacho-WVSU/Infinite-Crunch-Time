@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7j23h6m71eks"]
+[gd_scene load_steps=6 format=3 uid="uid://b7j23h6m71eks"]
 
 [ext_resource type="Texture2D" uid="uid://dtwthtfvwws0w" path="res://assets/bg/green_bg.png" id="1_ds1ku"]
+[ext_resource type="Script" uid="uid://1ix1aecbeix6" path="res://scripts/morning.gd" id="2_5gpx1"]
 [ext_resource type="FontFile" uid="uid://vqe8nm85q87s" path="res://fonts/Pixel Digivolve/Pixel Digivolve.otf" id="2_opn0m"]
 [ext_resource type="Texture2D" uid="uid://bp7qd6fv3grm0" path="res://assets/objects/cubicleRoom_view.png" id="2_y8scg"]
 [ext_resource type="Texture2D" uid="uid://b20t1fd816ohr" path="res://assets/objects/red_button.png" id="3_exavd"]
@@ -13,6 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_ds1ku")
 expand_mode = 1
+script = ExtResource("2_5gpx1")
 
 [node name="CubicleRoom" type="TextureRect" parent="."]
 layout_mode = 1
@@ -38,34 +40,34 @@ offset_top = 21.0
 offset_bottom = 221.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HeaderMargin"]
+[node name="Header" type="HBoxContainer" parent="HeaderMargin"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 200
 
-[node name="TurnsLeft" type="Label" parent="HeaderMargin/HBoxContainer"]
+[node name="TurnsLeft" type="Label" parent="HeaderMargin/Header"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_opn0m")
 theme_override_font_sizes/font_size = 40
 text = "Turns Left"
 
-[node name="Activity" type="Label" parent="HeaderMargin/HBoxContainer"]
+[node name="Activity" type="Label" parent="HeaderMargin/Header"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_opn0m")
 theme_override_font_sizes/font_size = 40
 text = "Activity"
 
-[node name="EnergyBar" type="ProgressBar" parent="HeaderMargin/HBoxContainer"]
+[node name="EnergyBar" type="ProgressBar" parent="HeaderMargin/Header"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("2_opn0m")
-theme_override_font_sizes/font_size = 20
-value = 100.0
+theme_override_font_sizes/font_size = 40
 
-[node name="Time" type="Label" parent="HeaderMargin/HBoxContainer"]
+[node name="Time" type="Label" parent="HeaderMargin/Header"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_opn0m")
@@ -161,3 +163,8 @@ theme_override_fonts/font = ExtResource("2_opn0m")
 theme_override_font_sizes/font_size = 40
 text = "Side Quests"
 horizontal_alignment = 1
+
+[connection signal="pressed" from="FooterMargin/Footer/ArtButton" to="." method="_on_art_button_pressed"]
+[connection signal="pressed" from="FooterMargin/Footer/ProgrammingButton" to="." method="_on_programming_button_pressed"]
+[connection signal="pressed" from="FooterMargin/Footer/MusicButton" to="." method="_on_music_button_pressed"]
+[connection signal="pressed" from="FooterMargin/Footer/SideQuestsButton" to="." method="_on_side_quests_button_pressed"]

@@ -60,6 +60,7 @@ theme_override_font_sizes/font_size = 40
 text = "Activity"
 
 [node name="EnergyBar" type="ProgressBar" parent="HeaderMargin/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

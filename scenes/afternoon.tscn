@@ -55,9 +55,12 @@ theme_override_font_sizes/font_size = 40
 text = "Activity"
 
 [node name="EnergyBar" type="ProgressBar" parent="HeaderMargin/Header"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_2b3fn")
+theme_override_font_sizes/font_size = 40
 value = 100.0
 
 [node name="Time" type="Label" parent="HeaderMargin/Header"]

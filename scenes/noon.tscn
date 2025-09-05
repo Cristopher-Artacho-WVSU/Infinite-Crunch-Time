@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhgjjrelu1qd5"]
+[gd_scene load_steps=6 format=3 uid="uid://dhgjjrelu1qd5"]
 
 [ext_resource type="Texture2D" uid="uid://dtwthtfvwws0w" path="res://assets/bg/green_bg.png" id="1_gj3y7"]
 [ext_resource type="FontFile" uid="uid://vqe8nm85q87s" path="res://fonts/Pixel Digivolve/Pixel Digivolve.otf" id="2_ulygp"]
+[ext_resource type="Script" uid="uid://ua2t35tgphkk" path="res://scripts/noon.gd" id="2_wwirv"]
 [ext_resource type="Texture2D" uid="uid://bp7qd6fv3grm0" path="res://assets/objects/cubicleRoom_view.png" id="2_ykq11"]
 [ext_resource type="Texture2D" uid="uid://b20t1fd816ohr" path="res://assets/objects/red_button.png" id="3_wd86f"]
 
@@ -13,6 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_gj3y7")
 expand_mode = 3
+script = ExtResource("2_wwirv")
 metadata/_edit_use_anchors_ = true
 
 [node name="CubicleRoom" type="TextureRect" parent="."]
@@ -57,19 +59,19 @@ theme_override_font_sizes/font_size = 40
 text = "Activity"
 
 [node name="EnergyBar" type="ProgressBar" parent="HeaderMargin/Header"]
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("2_ulygp")
-theme_override_font_sizes/font_size = 20
-value = 100.0
+theme_override_font_sizes/font_size = 40
 
 [node name="Time" type="Label" parent="HeaderMargin/Header"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_ulygp")
 theme_override_font_sizes/font_size = 40
-text = "Aternoon"
+text = "Noon"
 
 [node name="FooterMargin" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 200)
@@ -161,3 +163,8 @@ grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_ulygp")
 theme_override_font_sizes/font_size = 40
 text = "Side Quests"
+
+[connection signal="pressed" from="FooterMargin/Footer/Eat" to="." method="_on_eat_pressed"]
+[connection signal="pressed" from="FooterMargin/Footer/SocialMediaButtom" to="." method="_on_social_media_buttom_pressed"]
+[connection signal="pressed" from="FooterMargin/Footer/TutorialReviewButton" to="." method="_on_tutorial_review_button_pressed"]
+[connection signal="pressed" from="FooterMargin/Footer/SideQuestsButton" to="." method="_on_side_quests_button_pressed"]

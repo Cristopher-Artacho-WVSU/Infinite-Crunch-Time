@@ -11,14 +11,17 @@ config_version=5
 [application]
 
 config/name="Infinite Crunch Time"
+run/main_scene="uid://cckurptpbog7n"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameState="*res://scripts/global_config.gd"
+GlobalConfig="*res://scripts/global_config.gd"
 
 [display]
 
 window/size/viewport_width=1600
 window/size/viewport_height=896
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_width"

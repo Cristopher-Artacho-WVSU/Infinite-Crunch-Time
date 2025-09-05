@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs4a0y6cjje07"]
+
+[ext_resource type="Script" uid="uid://bdvrolic3mlje" path="res://scripts/art_workstation.gd" id="1_f2tl3"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_f2tl3")

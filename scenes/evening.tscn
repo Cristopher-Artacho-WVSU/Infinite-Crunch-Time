@@ -1,0 +1,164 @@
+[gd_scene load_steps=5 format=3 uid="uid://djov7hrnqdjpv"]
+
+[ext_resource type="Texture2D" uid="uid://dtwthtfvwws0w" path="res://assets/bg/green_bg.png" id="1_aesco"]
+[ext_resource type="Texture2D" uid="uid://bp7qd6fv3grm0" path="res://assets/objects/cubicleRoom_view.png" id="2_3ogra"]
+[ext_resource type="FontFile" uid="uid://vqe8nm85q87s" path="res://fonts/Pixel Digivolve/Pixel Digivolve.otf" id="2_3upi2"]
+[ext_resource type="Texture2D" uid="uid://b20t1fd816ohr" path="res://assets/objects/red_button.png" id="2_365tf"]
+
+[node name="evening_bg" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_aesco")
+expand_mode = 3
+
+[node name="CubicleRoom" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -545.5
+offset_top = -482.0
+offset_right = 545.5
+offset_bottom = 482.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3ogra")
+
+[node name="HeaderMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -102.0
+offset_right = 102.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeaderMargin"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 200
+
+[node name="TurnsLeft" type="Label" parent="HeaderMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_3upi2")
+theme_override_font_sizes/font_size = 40
+text = "Turns Left: "
+
+[node name="Activity" type="Label" parent="HeaderMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_3upi2")
+theme_override_font_sizes/font_size = 40
+text = "Activity"
+
+[node name="EnergyBar" type="ProgressBar" parent="HeaderMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3upi2")
+theme_override_font_sizes/font_size = 40
+
+[node name="Time" type="Label" parent="HeaderMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_3upi2")
+theme_override_font_sizes/font_size = 40
+text = "Evening"
+
+[node name="FooterMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -200.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FooterMargin"]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="CombineOutputsButton" type="TextureButton" parent="FooterMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture_normal = ExtResource("2_365tf")
+
+[node name="CombineOutputsLabel" type="Label" parent="FooterMargin/HBoxContainer/CombineOutputsButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -191.5
+offset_right = 191.5
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_3upi2")
+theme_override_font_sizes/font_size = 40
+text = "Combine Outputs"
+
+[node name="TestOutputButton" type="TextureButton" parent="FooterMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture_normal = ExtResource("2_365tf")
+
+[node name="TestOutputLabel" type="Label" parent="FooterMargin/HBoxContainer/TestOutputButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -156.0
+offset_right = 156.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_3upi2")
+theme_override_font_sizes/font_size = 40
+text = "Test Outputs"
+
+[node name="PlanTommorrowButton" type="TextureButton" parent="FooterMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("2_365tf")
+
+[node name="PlanTommorrowLabel" type="Label" parent="FooterMargin/HBoxContainer/PlanTommorrowButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -189.0
+offset_right = 189.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_3upi2")
+theme_override_font_sizes/font_size = 40
+text = "Plan Tommorrow"
+
+[node name="SleepButton" type="TextureButton" parent="FooterMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture_normal = ExtResource("2_365tf")
+
+[node name="SleepLabel" type="Label" parent="FooterMargin/HBoxContainer/SleepButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -62.5
+offset_right = 62.5
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_3upi2")
+theme_override_font_sizes/font_size = 40
+text = "Sleep"

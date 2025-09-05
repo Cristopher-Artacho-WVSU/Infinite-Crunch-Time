@@ -1,0 +1,163 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7j23h6m71eks"]
+
+[ext_resource type="Texture2D" uid="uid://dtwthtfvwws0w" path="res://assets/bg/green_bg.png" id="1_ds1ku"]
+[ext_resource type="FontFile" uid="uid://vqe8nm85q87s" path="res://fonts/Pixel Digivolve/Pixel Digivolve.otf" id="2_opn0m"]
+[ext_resource type="Texture2D" uid="uid://bp7qd6fv3grm0" path="res://assets/objects/cubicleRoom_view.png" id="2_y8scg"]
+[ext_resource type="Texture2D" uid="uid://b20t1fd816ohr" path="res://assets/objects/red_button.png" id="3_exavd"]
+
+[node name="morning_bg" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ds1ku")
+expand_mode = 1
+
+[node name="CubicleRoom" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -545.5
+offset_top = -482.0
+offset_right = 545.5
+offset_bottom = 482.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_y8scg")
+
+[node name="HeaderMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 21.0
+offset_bottom = 221.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HeaderMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 200
+
+[node name="TurnsLeft" type="Label" parent="HeaderMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 40
+text = "Turns Left"
+
+[node name="Activity" type="Label" parent="HeaderMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 40
+text = "Activity"
+
+[node name="EnergyBar" type="ProgressBar" parent="HeaderMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 20
+value = 100.0
+
+[node name="Time" type="Label" parent="HeaderMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 40
+text = "Morning"
+
+[node name="FooterMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Footer" type="HBoxContainer" parent="FooterMargin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 150
+
+[node name="ArtButton" type="TextureButton" parent="FooterMargin/Footer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_exavd")
+
+[node name="ArtLabel" type="Label" parent="FooterMargin/Footer/ArtButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.0
+offset_right = 41.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 40
+text = "Art"
+horizontal_alignment = 1
+
+[node name="ProgrammingButton" type="TextureButton" parent="FooterMargin/Footer"]
+layout_mode = 2
+texture_normal = ExtResource("3_exavd")
+
+[node name="ProgrammingLabel" type="Label" parent="FooterMargin/Footer/ProgrammingButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.0
+offset_right = 74.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 40
+text = "Coding"
+horizontal_alignment = 1
+
+[node name="MusicButton" type="TextureButton" parent="FooterMargin/Footer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_exavd")
+
+[node name="MusicLabel" type="Label" parent="FooterMargin/Footer/MusicButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -62.5
+offset_right = 62.5
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 40
+text = "Music"
+horizontal_alignment = 1
+
+[node name="SideQuestsButton" type="TextureButton" parent="FooterMargin/Footer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("3_exavd")
+
+[node name="SideQuestsLabel" type="Label" parent="FooterMargin/Footer/SideQuestsButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -133.0
+offset_right = 133.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 40
+text = "Side Quests"
+horizontal_alignment = 1

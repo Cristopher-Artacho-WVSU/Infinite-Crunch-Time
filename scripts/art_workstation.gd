@@ -1,9 +1,9 @@
 extends Node2D
 
-@export var source_image_texture: Texture2D = preload("res://assets/objects/sample_butterfly.png")
-@export var pixel_size: int = 18
+@export var source_image_texture: Texture2D = preload("res://assets/objects/red_button.png")
+@export var pixel_size: int = 3
 
-@onready var animation = $AnimatedSprite2D 
+#@onready var animation = $AnimatedSprite2D 
 
 # --- Internal state ---
 var color_to_index: Dictionary = {}   # key: String(color), value: int index
@@ -15,7 +15,7 @@ var selected_index: int = -1          # explicitly typed to avoid "null" inferen
 	
 func _ready() -> void:
 #	FOR THE BACKGROUND
-	animation.play("bg")
+	#animation.play("bg")
 	image_conversion()
 
 

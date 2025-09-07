@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7j23h6m71eks"]
+[gd_scene load_steps=6 format=3 uid="uid://baj7ld6y3q4sl"]
 
 [ext_resource type="Texture2D" uid="uid://dtwthtfvwws0w" path="res://assets/bg/green_bg.png" id="1_ds1ku"]
-[ext_resource type="Script" uid="uid://1ix1aecbeix6" path="res://scripts/morning.gd" id="2_5gpx1"]
+[ext_resource type="Script" uid="uid://0euxbx5caw8" path="res://scripts/main.gd" id="2_iywne"]
 [ext_resource type="FontFile" uid="uid://vqe8nm85q87s" path="res://fonts/Pixel Digivolve/Pixel Digivolve.otf" id="2_opn0m"]
 [ext_resource type="Texture2D" uid="uid://bp7qd6fv3grm0" path="res://assets/objects/cubicleRoom_view.png" id="2_y8scg"]
 [ext_resource type="Texture2D" uid="uid://b20t1fd816ohr" path="res://assets/objects/red_button.png" id="3_exavd"]
 
-[node name="morning_bg" type="TextureRect"]
+[node name="base_game" type="TextureRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_ds1ku")
 expand_mode = 1
-script = ExtResource("2_5gpx1")
+script = ExtResource("2_iywne")
 
 [node name="CubicleRoom" type="TextureRect" parent="."]
 layout_mode = 1
@@ -32,7 +32,7 @@ grow_vertical = 2
 texture = ExtResource("2_y8scg")
 
 [node name="HeaderMargin" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -41,38 +41,25 @@ offset_bottom = 221.0
 grow_horizontal = 2
 
 [node name="Header" type="HBoxContainer" parent="HeaderMargin"]
+layout_direction = 2
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 200
 
 [node name="TurnsLeft" type="Label" parent="HeaderMargin/Header"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 theme_override_fonts/font = ExtResource("2_opn0m")
 theme_override_font_sizes/font_size = 40
-text = "Turns Left"
-
-[node name="Activity" type="Label" parent="HeaderMargin/Header"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_opn0m")
-theme_override_font_sizes/font_size = 40
-text = "Activity"
-
-[node name="EnergyBar" type="ProgressBar" parent="HeaderMargin/Header"]
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("2_opn0m")
-theme_override_font_sizes/font_size = 40
+text = "    Days Left"
 
 [node name="Time" type="Label" parent="HeaderMargin/Header"]
+clip_contents = true
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("2_opn0m")
 theme_override_font_sizes/font_size = 40
-text = "Morning"
+text = "6:00       "
 
 [node name="FooterMargin" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 200)
@@ -86,12 +73,11 @@ grow_vertical = 0
 
 [node name="Footer" type="HBoxContainer" parent="FooterMargin"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_constants/separation = 150
 
 [node name="ArtButton" type="TextureButton" parent="FooterMargin/Footer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 texture_normal = ExtResource("3_exavd")
 
 [node name="ArtLabel" type="Label" parent="FooterMargin/Footer/ArtButton"]
@@ -110,6 +96,7 @@ horizontal_alignment = 1
 
 [node name="ProgrammingButton" type="TextureButton" parent="FooterMargin/Footer"]
 layout_mode = 2
+size_flags_horizontal = 6
 texture_normal = ExtResource("3_exavd")
 
 [node name="ProgrammingLabel" type="Label" parent="FooterMargin/Footer/ProgrammingButton"]
@@ -128,7 +115,7 @@ horizontal_alignment = 1
 
 [node name="MusicButton" type="TextureButton" parent="FooterMargin/Footer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
 texture_normal = ExtResource("3_exavd")
 
 [node name="MusicLabel" type="Label" parent="FooterMargin/Footer/MusicButton"]
@@ -145,26 +132,73 @@ theme_override_font_sizes/font_size = 40
 text = "Music"
 horizontal_alignment = 1
 
-[node name="SideQuestsButton" type="TextureButton" parent="FooterMargin/Footer"]
-layout_mode = 2
-size_flags_horizontal = 0
-texture_normal = ExtResource("3_exavd")
-
-[node name="SideQuestsLabel" type="Label" parent="FooterMargin/Footer/SideQuestsButton"]
+[node name="ProgressBars" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -133.0
-offset_right = 133.0
-offset_bottom = 48.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 50.0
+offset_top = -44.5
+offset_right = 350.0
+offset_bottom = 44.5
+grow_vertical = 2
+
+[node name="Programming" type="ProgressBar" parent="ProgressBars"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+show_percentage = false
+
+[node name="ProgrammingLabel" type="Label" parent="ProgressBars/Programming"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 106.0
+offset_bottom = 11.5
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_opn0m")
-theme_override_font_sizes/font_size = 40
-text = "Side Quests"
+theme_override_font_sizes/font_size = 20
+text = "Programming"
+
+[node name="Artworks" type="ProgressBar" parent="ProgressBars"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+show_percentage = false
+
+[node name="ArtworksLabel" type="Label" parent="ProgressBars/Artworks"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 142.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 20
+text = "Artworks Progress"
+
+[node name="Music" type="ProgressBar" parent="ProgressBars"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+show_percentage = false
+
+[node name="MusicLabel" type="Label" parent="ProgressBars/Music"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 112.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_opn0m")
+theme_override_font_sizes/font_size = 20
+text = "Music Progress"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="FooterMargin/Footer/ArtButton" to="." method="_on_art_button_pressed"]
 [connection signal="pressed" from="FooterMargin/Footer/ProgrammingButton" to="." method="_on_programming_button_pressed"]
 [connection signal="pressed" from="FooterMargin/Footer/MusicButton" to="." method="_on_music_button_pressed"]
-[connection signal="pressed" from="FooterMargin/Footer/SideQuestsButton" to="." method="_on_side_quests_button_pressed"]

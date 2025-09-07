@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://0le3lan8cwht"]
+
+[ext_resource type="Texture2D" uid="uid://dtwthtfvwws0w" path="res://assets/bg/green_bg.png" id="1_p7iqy"]
+[ext_resource type="Texture2D" uid="uid://y4akwwgxlt5w" path="res://assets/objects/desktop_monitor.png" id="2_ggaot"]
+[ext_resource type="FontFile" uid="uid://bg727n08n56s2" path="res://fonts/depixel/DePixelHalbfett.otf" id="3_ggaot"]
+
+[node name="TextureRect" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_p7iqy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -800.0
+offset_top = -448.0
+offset_right = 800.0
+offset_bottom = 448.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ggaot")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.543
+offset_left = -421.0
+offset_top = -304.0
+offset_right = 436.0
+offset_bottom = 5.47195
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextEdit" type="TextEdit" parent="TextureRect/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ggaot")
+theme_override_font_sizes/font_size = 17
+text = "func _physics_process(delta):
+#	GAME OVER IF THE NUMBER OF DAYS IS 0 AND TIME IS 6PM
+	if GlobalConfig.days_left <= 0 and GlobalConfig.current_time >= 18:
+		GlobalConfig.game_over()
+	display_time()
+
+
+func _on_art_button_pressed() -> void:
+	GlobalConfig.current_time += 2
+	pass # Replace with function body."
+placeholder_text = "Text here"

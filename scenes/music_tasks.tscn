@@ -1,0 +1,119 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1bqdce2nlaf7"]
+
+[ext_resource type="Script" uid="uid://cxs602c73p0ro" path="res://scripts/music_tasks.gd" id="1_2bfuj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flat"]
+bg_color = Color(0.12549, 1, 1, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2bfuj")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.474
+anchor_top = 0.565
+anchor_right = 0.474
+anchor_bottom = 0.565
+offset_left = -319.4
+offset_top = -396.24
+offset_right = 320.6
+offset_bottom = 247.76
+pivot_offset = Vector2(391, 31)
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="TextureButton" type="Button" parent="GridContainer"]
+self_modulate = Color(0.8, 0, 0.8, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_flat")
+
+[node name="TextureButton2" type="Button" parent="GridContainer"]
+self_modulate = Color(0, 0, 1, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_flat")
+
+[node name="TextureButton3" type="Button" parent="GridContainer"]
+self_modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_flat")
+
+[node name="TextureButton4" type="Button" parent="GridContainer"]
+self_modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_flat")
+
+[node name="TextureButton5" type="Button" parent="GridContainer"]
+self_modulate = Color(0.5, 0, 0.5, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_flat")
+
+[node name="TextureButton6" type="Button" parent="GridContainer"]
+self_modulate = Color(0, 0, 0.7, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_flat")
+
+[node name="TextureButton7" type="Button" parent="GridContainer"]
+self_modulate = Color(0, 0.7, 0, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_flat")
+
+[node name="TextureButton8" type="Button" parent="GridContainer"]
+self_modulate = Color(0.3, 0, 0.3, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_flat")
+
+[node name="TextureButton9" type="Button" parent="GridContainer"]
+self_modulate = Color(0, 0, 0.4, 1)
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_flat")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 581.0
+offset_top = -2.0
+offset_right = 963.0
+offset_bottom = 53.0
+theme_override_font_sizes/normal_font_size = 40
+text = "Music Composition"
+fit_content = true
+scroll_active = false
+tab_size = 7
+
+[node name="RoundLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 50.0
+offset_right = 600.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 30
+text = "Round: 1"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="GridContainer/TextureButton" to="." method="_on_button_pressed" binds= [0]]
+[connection signal="pressed" from="GridContainer/TextureButton2" to="." method="_on_button_pressed" binds= [1]]
+[connection signal="pressed" from="GridContainer/TextureButton3" to="." method="_on_button_pressed" binds= [2]]
+[connection signal="pressed" from="GridContainer/TextureButton4" to="." method="_on_button_pressed" binds= [3]]
+[connection signal="pressed" from="GridContainer/TextureButton5" to="." method="_on_button_pressed" binds= [4]]
+[connection signal="pressed" from="GridContainer/TextureButton6" to="." method="_on_button_pressed" binds= [5]]
+[connection signal="pressed" from="GridContainer/TextureButton7" to="." method="_on_button_pressed" binds= [6]]
+[connection signal="pressed" from="GridContainer/TextureButton8" to="." method="_on_button_pressed" binds= [7]]
+[connection signal="pressed" from="GridContainer/TextureButton9" to="." method="_on_button_pressed" binds= [8]]

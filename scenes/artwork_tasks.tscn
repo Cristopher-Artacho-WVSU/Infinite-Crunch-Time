@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://jful2entwu8y"]
 
 [ext_resource type="Texture2D" uid="uid://cpa05kh4b3hb7" path="res://assets/bg/canvas_bg.png" id="1_tyu1c"]
-[ext_resource type="Script" uid="uid://lgehtrecpkjp" path="res://scripts/artwork_tasks.gd" id="2_fuln0"]
+[ext_resource type="Script" path="res://scripts/artwork_tasks.gd" id="2_fuln0"]
 
 [node name="bg" type="TextureRect"]
 offset_right = 40.0

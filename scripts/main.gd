@@ -17,7 +17,7 @@ func _physics_process(delta):
 
 func _on_art_button_pressed() -> void:
 	if GlobalConfig.finished_artwork_task == false:
-		pass
+		get_tree().change_scene_to_file("res://scenes/artwork_tasks.tscn")
 	else:
 		print("All tasks in this workstation is done")
 

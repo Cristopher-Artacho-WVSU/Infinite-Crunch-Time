@@ -1,18 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://0le3lan8cwht"]
+[gd_scene load_steps=7 format=3 uid="uid://0le3lan8cwht"]
 
 [ext_resource type="Texture2D" uid="uid://dtwthtfvwws0w" path="res://assets/bg/green_bg.png" id="1_p7iqy"]
+[ext_resource type="Script" uid="uid://dxjsjv74nohrf" path="res://scripts/programming_tasks.gd" id="2_b5eq2"]
 [ext_resource type="Texture2D" uid="uid://y4akwwgxlt5w" path="res://assets/objects/desktop_monitor.png" id="2_ggaot"]
 [ext_resource type="FontFile" uid="uid://bg727n08n56s2" path="res://fonts/depixel/DePixelHalbfett.otf" id="3_ggaot"]
+[ext_resource type="FontFile" uid="uid://bqi1tvhv2nf51" path="res://fonts/depixel/depixelhalbfett.woff2" id="5_upao5"]
+[ext_resource type="FontFile" uid="uid://vqe8nm85q87s" path="res://fonts/Pixel Digivolve/Pixel Digivolve.otf" id="6_q3d5q"]
 
-[node name="TextureRect" type="TextureRect"]
+[node name="bg" type="TextureRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_p7iqy")
+script = ExtResource("2_b5eq2")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="desktop_monitor" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ggaot")
 
-[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+[node name="TextMargin" type="MarginContainer" parent="desktop_monitor"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -41,18 +45,50 @@ offset_bottom = 5.47195
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextEdit" type="TextEdit" parent="TextureRect/MarginContainer"]
+[node name="Code" type="TextEdit" parent="desktop_monitor/TextMargin"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_ggaot")
 theme_override_font_sizes/font_size = 17
-text = "func _physics_process(delta):
-#	GAME OVER IF THE NUMBER OF DAYS IS 0 AND TIME IS 6PM
-	if GlobalConfig.days_left <= 0 and GlobalConfig.current_time >= 18:
-		GlobalConfig.game_over()
-	display_time()
-
-
-func _on_art_button_pressed() -> void:
-	GlobalConfig.current_time += 2
-	pass # Replace with function body."
+text = "Sample Text"
 placeholder_text = "Text here"
+
+[node name="problem_note" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -446.0
+offset_right = 285.0
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("5_upao5")
+theme_override_font_sizes/normal_font_size = 20
+text = "Sample Note"
+tab_size = 7
+
+[node name="choices_container" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -497.5
+offset_top = -334.0
+offset_right = 497.5
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="timer_label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 399.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("6_q3d5q")
+theme_override_font_sizes/font_size = 40
+text = "Time Left:"
+
+[node name="Timer" type="Timer" parent="timer_label"]
+autostart = true

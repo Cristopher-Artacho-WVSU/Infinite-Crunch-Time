@@ -16,17 +16,23 @@ func _physics_process(delta):
 
 
 func _on_art_button_pressed() -> void:
-	GlobalConfig.current_time += 2
-	pass # Replace with function body.
+	if GlobalConfig.finished_artwork_task == false:
+		pass
+	else:
+		print("All tasks in this workstation is done")
 
 func _on_programming_button_pressed() -> void:
-	pass # Replace with function body.
+	if GlobalConfig.finished_programming_task == false:
+		get_tree().change_scene_to_file("res://scenes/programming_tasks.tscn")
+	else:
+		print("All tasks in this workstation is done")
 
 func _on_music_button_pressed() -> void:
-	pass # Replace with function body.
+	if GlobalConfig.finished_music_task == false:
+		pass
+	else:
+		print("All tasks in this workstation is done")
 
-func _on_resume_button_pressed() -> void:
-	pass # Replace with function body.
 	
 
 #	LOGIC FOR DISPLAYING THE CURRENT TIME

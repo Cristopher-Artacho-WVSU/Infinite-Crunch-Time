@@ -2,6 +2,10 @@ extends Control
 
 @export var source_image_texture: Texture2D = preload("res://assets/objects/sample_butterfly.png")
 
+@onready var timer_label = $"../timer_label"
+@onready var timer = $"../timer_label/Timer"
+var total_time = 120
+
 # --- Internal state ---
 var color_to_index: Dictionary = {}   # key: String(color), value: int index
 var index_to_color: Dictionary = {}   # key: int index, value: Color
@@ -10,6 +14,8 @@ var selected_index: int = -1
 
 
 func _ready() -> void:
+	timer.timeout.connect(_on_timer_timeout)
+	_update_label()
 	image_conversion()
 
 
@@ -189,4 +195,31 @@ func _check_completion() -> void:
 	for tile in tile_nodes.values():
 		if tile.get_meta("filled") == false:
 			return # stop early if we find at least one unfilled tile
-	print("Art task completed!")
+	print("All tiles filled")
+	GlobalConfig.finished_artwork_task = true
+	evaluate_performance()
+	get_tree().change_scene_to_file("res://scenes/game.tscn")
+
+
+func _on_timer_timeout():
+	if total_time > 0:
+		total_time -= 1
+		_update_label()
+	else:
+		evaluate_performance()
+		timer.stop()
+		print("Time's up!")
+		get_tree().change_scene_to_file("res://scenes/game.tscn")
+
+func _update_label():
+	var minutes = total_time / 60
+	var seconds = total_time % 60
+	timer_label.text = "Time Left: " + str(minutes) + ":" + str(seconds).pad_zeros(2)
+	
+	
+func evaluate_performance():
+	var consumed_time = 120 - total_time
+	if consumed_time <= 60:
+		GlobalConfig.current_time += 1
+	elif consumed_time <= 120:
+		GlobalConfig.current_time += 2

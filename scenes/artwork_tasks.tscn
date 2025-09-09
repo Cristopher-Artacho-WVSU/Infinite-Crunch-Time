@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://jful2entwu8y"]
+[gd_scene load_steps=4 format=3 uid="uid://jful2entwu8y"]
 
 [ext_resource type="Texture2D" uid="uid://cpa05kh4b3hb7" path="res://assets/bg/canvas_bg.png" id="1_tyu1c"]
-[ext_resource type="Script" path="res://scripts/artwork_tasks.gd" id="2_fuln0"]
+[ext_resource type="Script" uid="uid://lgehtrecpkjp" path="res://scripts/artwork_tasks.gd" id="2_fuln0"]
+[ext_resource type="FontFile" uid="uid://vqe8nm85q87s" path="res://fonts/Pixel Digivolve/Pixel Digivolve.otf" id="3_i7irk"]
 
 [node name="bg" type="TextureRect"]
 offset_right = 40.0
@@ -29,3 +30,15 @@ offset_top = -310.5
 offset_bottom = 310.5
 grow_horizontal = 0
 grow_vertical = 2
+
+[node name="timer_label" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 399.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("3_i7irk")
+theme_override_font_sizes/font_size = 40
+text = "Time Left:"
+
+[node name="Timer" type="Timer" parent="timer_label"]
+autostart = true

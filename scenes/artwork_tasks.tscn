@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://lgehtrecpkjp" path="res://scripts/artwork_tasks.gd" id="2_fuln0"]
 [ext_resource type="FontFile" uid="uid://vqe8nm85q87s" path="res://fonts/Pixel Digivolve/Pixel Digivolve.otf" id="3_i7irk"]
 
-[node name="bg" type="TextureRect"]
+[node name="bg2" type="TextureRect"]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_tyu1c")
@@ -32,6 +32,7 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="timer_label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 399.0

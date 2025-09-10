@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://baj7ld6y3q4sl"]
 
 [ext_resource type="Texture2D" uid="uid://dtwthtfvwws0w" path="res://assets/bg/green_bg.png" id="1_ds1ku"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="2_iywne"]
+[ext_resource type="Script" uid="uid://0euxbx5caw8" path="res://scripts/main.gd" id="2_iywne"]
 [ext_resource type="FontFile" uid="uid://vqe8nm85q87s" path="res://fonts/Pixel Digivolve/Pixel Digivolve.otf" id="2_opn0m"]
 [ext_resource type="Texture2D" uid="uid://bp7qd6fv3grm0" path="res://assets/objects/cubicleRoom_view.png" id="2_y8scg"]
 [ext_resource type="Texture2D" uid="uid://b20t1fd816ohr" path="res://assets/objects/red_button.png" id="3_exavd"]

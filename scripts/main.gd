@@ -11,7 +11,7 @@ func _physics_process(delta):
 #	GAME OVER IF THE NUMBER OF DAYS IS 0 AND TIME IS 6PM
 	if GlobalConfig.days_left <= 0 and GlobalConfig.current_time >= 18:
 		GlobalConfig.game_over()
-	if GlobalConfig.artworkTasks < 2 and GlobalConfig.programmingTasks < 2 and GlobalConfig.musicTasks < 2:
+	if GlobalConfig.artworkTasks < 2 and GlobalConfig.programmingTasks < 2:
 		GlobalConfig.reset_day()
 	display_time()
 	

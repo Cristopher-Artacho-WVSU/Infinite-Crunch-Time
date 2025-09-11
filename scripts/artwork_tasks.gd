@@ -1,12 +1,24 @@
 extends Control
 
-@export var source_image_texture: Texture2D = preload("res://assets/objects/cherry.png")
+# --- Images for possible tasks ---
+@export var cherry_image: Texture2D = preload("res://assets/objects/cherry.png")
+@export var character_image: Texture2D = preload("res://assets/objects/character.png")
+@export var house_image: Texture2D = preload("res://assets/objects/house.png")
+@export var slime: Texture2D = preload("res://assets/objects/slime.png")
+@export var stone: Texture2D = preload("res://assets/objects/stone.png")
+@export var tree: Texture2D = preload("res://assets/objects/tree.png")
 
+# --- Internal state for tasks ---
+var task_images: Array = []        # stores all available images
+var task_sequence: Array = []      # stores today's chosen tasks (2 only)
+var current_task_index: int = 0    # which task we’re currently on
+
+# --- Timer ---
 @onready var timer_label = $"../timer_label"
 @onready var timer = $"../timer_label/Timer"
 var total_time = 120
 
-# --- Internal state ---
+# --- Pixel Art State ---
 var color_to_index: Dictionary = {}   # key: String(color), value: int index
 var index_to_color: Dictionary = {}   # key: int index, value: Color
 var tile_nodes: Dictionary = {}       # key: Vector2i(grid_x,grid_y), value: Panel
@@ -14,12 +26,46 @@ var selected_index: int = -1
 
 
 func _ready() -> void:
+	# Initialize the pool of possible tasks
+	task_images = [
+		cherry_image,
+		character_image,
+		house_image,
+		slime,
+		stone,
+		tree
+	]
+
+	# Choose 2 random tasks for the day
+	task_sequence = []
+	var shuffled := task_images.duplicate()
+	shuffled.shuffle()
+	task_sequence = shuffled.slice(0, 1)
+
+	# Load the first task
+	_load_current_task()
+
+	# Setup timer
 	timer.timeout.connect(_on_timer_timeout)
 	_update_label()
-	image_conversion()
 
 
-func image_conversion():
+func _load_current_task() -> void:
+	# Clear old tiles/palette if reloading a new task
+	for child in get_children():
+		if child is Panel:
+			child.queue_free()
+	color_to_index.clear()
+	index_to_color.clear()
+	tile_nodes.clear()
+	selected_index = -1
+
+	# Pick the image for the current task
+	var source_image_texture: Texture2D = task_sequence[current_task_index]
+	image_conversion(source_image_texture)
+
+
+func image_conversion(source_image_texture: Texture2D):
 	# READ IMAGE AND CONVERT TO RGBA8
 	var img: Image = source_image_texture.get_image()
 	img.convert(Image.FORMAT_RGBA8)
@@ -34,7 +80,6 @@ func image_conversion():
 	var scale_y: float = target_size.y / img_h
 	var pixel_size: int = int(min(scale_x, scale_y))
 
-	# Final drawn size of the image
 	var grid_size_pixels: Vector2 = Vector2(img_w * pixel_size, img_h * pixel_size)
 
 	# --- CENTERING OFFSET ---
@@ -62,7 +107,6 @@ func image_conversion():
 			var tile := Panel.new()
 			tile.name = "Tile_%d_%d" % [x, y]
 
-			# Position and enforce size explicitly
 			tile.position = Vector2(offset_x + x * pixel_size, offset_y + y * pixel_size)
 			tile.custom_minimum_size = Vector2(pixel_size, pixel_size)
 
@@ -70,9 +114,9 @@ func image_conversion():
 			var sb := StyleBoxFlat.new()
 			sb.bg_color = Color.WHITE
 			sb.border_color = Color.BLACK
-			sb.border_width_left = 1
-			sb.border_width_top = 1
-			sb.border_width_right = 1
+			sb.border_width_left = 1 
+			sb.border_width_top = 1 
+			sb.border_width_right = 1 
 			sb.border_width_bottom = 1
 			tile.add_theme_stylebox_override("panel", sb)
 
@@ -122,9 +166,9 @@ func _create_palette(total_colors: int) -> void:
 		var style := StyleBoxFlat.new()
 		style.bg_color = index_to_color[i]
 		style.border_color = Color.BLACK
-		style.border_width_left = 1
-		style.border_width_top = 1
-		style.border_width_right = 1
+		style.border_width_left = 1 
+		style.border_width_top = 1 
+		style.border_width_right = 1 
 		style.border_width_bottom = 1
 		btn.add_theme_stylebox_override("normal", style)
 		btn.add_theme_color_override("font_color", Color.BLACK)
@@ -146,7 +190,6 @@ func _on_tile_gui_input(event: InputEvent, tile: Panel) -> void:
 			var start_pos: Vector2i = tile.get_meta("grid_pos")
 			_flood_fill(start_pos, tile_number)
 
-
 func _flood_fill(start_pos: Vector2i, num: int) -> void:
 	var color: Color = index_to_color[num]
 	var queue: Array = [start_pos]
@@ -166,7 +209,7 @@ func _flood_fill(start_pos: Vector2i, num: int) -> void:
 		if tile.get_meta("filled") == true:
 			continue
 
-		# apply filled style (solid color, no borders)
+		# Apply filled style (solid color, no borders)
 		var sb := StyleBoxFlat.new()
 		sb.bg_color = color
 		sb.border_color = Color.TRANSPARENT
@@ -176,14 +219,14 @@ func _flood_fill(start_pos: Vector2i, num: int) -> void:
 		sb.border_width_bottom = 0
 		tile.add_theme_stylebox_override("panel", sb)
 
-		# hide number label
+		# Hide number label
 		var lbl := tile.get_node_or_null("LabelCenter/NumberLabel")
 		if lbl:
 			lbl.visible = false
 
 		tile.set_meta("filled", true)
 
-		# enqueue 4-neighbors
+		# Enqueue 4-neighbors
 		for d in [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]:
 			queue.append(pos + d)
 
@@ -195,10 +238,17 @@ func _check_completion() -> void:
 	for tile in tile_nodes.values():
 		if tile.get_meta("filled") == false:
 			return # stop early if we find at least one unfilled tile
-	print("All tiles filled")
-	GlobalConfig.finished_artwork_task = true
-	evaluate_performance()
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	print("Task completed!")
+
+	# Move to next task if available
+	current_task_index += 1
+	if current_task_index < task_sequence.size():
+		_load_current_task()
+	else:
+		print("All tasks for today are done")
+		GlobalConfig.finished_artwork_task = true
+		evaluate_performance()
+		get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 
 func _on_timer_timeout():
@@ -211,13 +261,15 @@ func _on_timer_timeout():
 		print("Time's up!")
 		get_tree().change_scene_to_file("res://scenes/game.tscn")
 
+
 func _update_label():
 	var minutes = total_time / 60
 	var seconds = total_time % 60
 	timer_label.text = "Time Left: " + str(minutes) + ":" + str(seconds).pad_zeros(2)
-	
-	
+
+
 func evaluate_performance():
+	GlobalConfig.artworkTasks += 1
 	var consumed_time = 120 - total_time
 	if consumed_time <= 60:
 		GlobalConfig.current_time += 1

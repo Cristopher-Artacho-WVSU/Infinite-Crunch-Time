@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var jump_force: float = -400
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+@onready var hp = get_parent().get_node("hpBar")
 func _physics_process(delta: float) -> void:
 	# Apply gravity
 	if not is_on_floor():
@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 	# Handle input
 	player_movement()
 	player_jump()
-
+	monitor_hp()
 	# Apply movement
 	move_and_slide()
 
@@ -28,3 +28,8 @@ func player_jump():
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_force
 		print("Jump")
+
+func monitor_hp():
+	if hp.value <= 0:
+		print("Player is dead!")
+		

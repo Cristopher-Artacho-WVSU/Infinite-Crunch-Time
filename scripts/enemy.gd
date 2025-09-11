@@ -7,12 +7,15 @@ var is_dead: bool = false
 @onready var vision_area = $enemy_detect
 @onready var respawn_timer: Timer = $Timer   # Add a Timer as child of Enemy
 @onready var hitbox = $"body_hitbox&hurtbox"
+@onready var player_hp = get_parent().get_node("hpBar")
+
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	vision_area.area_entered.connect(_on_VisionArea_area_entered)
 	vision_area.area_exited.connect(_on_VisionArea_area_exited)
+	
 	hitbox.area_entered.connect(on_enemy_hits_player)
 	hitbox. area_entered.connect(on_player_attack_hits_enemy)
 	respawn_timer.one_shot = false
@@ -23,9 +26,9 @@ func _physics_process(delta: float) -> void:
 	enemy_movement()
 	if not is_on_floor():
 			velocity.y += gravity * delta
+			
+	
 	move_and_slide()
-
-
 
 func enemy_movement():
 	if player:
@@ -40,7 +43,8 @@ func enemy_movement():
 func on_enemy_hits_player(area: Area2D) -> void:
 	if area.name == "hurtbox":  # rename based on your player's Area2D node
 		print("player is damaged")
-
+		player_hp.value -= 30
+		
 # 2. If player's Collision2D collides with enemy → enemy dies
 func on_player_attack_hits_enemy(area: Area2D) -> void:
 	if area.name == "hitbox":  # adjust to your player's attack/hitbox node
